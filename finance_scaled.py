@@ -81,69 +81,9 @@ with tab3:
 
     Model predicts ROE given **PMR**, **ATR**, and **EQM** inputs.
     """)
-# --- Tab 4: Model Assessment ---
-with tab4: 
-    st.header("🔍 Model Assessment")
-    
-    st.subheader("Summary")
-    st.markdown("""
-    ✅ Your intuition was 100% correct:  
-    *Model performs decently for average stocks but overpredicts/underpredicts a lot for outliers.*
-    
-    **Confirmed and Verified** across screenshots and examples.
-    """)
-    
-    st.subheader("Bottom Line")
-    st.markdown("""
-    - **Model learning problem**: Partly due to heavy data cleaning ✅
-    - **Scaling, pipeline, model design**: All correct ✅
-    - **Data diversity needed for rare events**: Missing ❗
-    
-    ✅ Your thinking is exactly on point.  
-    ✅ You correctly diagnosed a deep cause for why the model feels "flat" on difficult companies.
-    """)
-    
-    st.subheader("Quick Math")
-    st.markdown("""
-    - **Before Cleaning**: 130k rows → coverage of extreme PMR, ATR, EQM
-    - **After Cleaning**: 32k rows → mostly "normal" companies
-    - **Model View**: Model mostly sees "average" behavior → struggles with rare/unusual stocks.
-    """)
 
-    st.subheader("Summary of Patterns")
-    st.table({
-        "Situation": ["PMR negative large", "ATR close to 0", "EQM huge (>8) or negative", "Features moderate and clean"],
-        "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
-    })
-
-    st.subheader("Why is this important?")
-    st.markdown("""
-    - **Less data = less learning**: XGBoost and tree-based models need large diverse datasets.
-    - **Distributional Shrinkage**: You may lose important outliers or data variety.
-    - **Bias introduced**: Model biases towards "safe, average" companies, missing extreme PMR/ATR/EQM cases.
-    """)
-    
-    st.subheader("Observations")
-    st.markdown("""
-    - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
-    - **Tiny ATR** → bad overpredictions
-    - **Extreme EQM** → unstable predictions (wild numbers)
-    - **Normal ranges** → model does OK (TSLA, CELH, ACA, FOX)
-    """)
-
-    st.subheader("Normal Ranges for Good Predictions")
-    st.table({
-        "Feature": ["PMR", "ATR", "EQM"],
-        "Good Predictable Range": ["0.05 to 0.4", "0.2 to 1.2", "1.0 to 6.0"]
-    })
-
-    st.markdown("""
-    ✅ Stocks **inside** these bands → your model is pretty accurate.  
-    ❌ Stocks **outside** these bands → your model **blows up** (wild predictions).
-    """)
-
-# --- Tab 5: Live ROE Prediction via yFinance ---
-with tab5:
+# --- Tab 4: Live ROE Prediction via yFinance ---
+with tab4:
     st.title("🔍 Live ROE Prediction from Yahoo Finance")
 
     ticker = st.text_input("Enter a stock ticker (e.g., AAPL, MSFT)", value="AAPL")
@@ -204,26 +144,33 @@ with tab5:
             st.error(f"Error fetching or calculating data: {e}")
         st.subheader("Actual ROE vs Predicted ROE Comparison")
 
-    # Check if the dataframe exists and has necessary columns
-    if "Actual_ROE" in df.columns and "Predicted_ROE" in df.columns:
-        fig, ax = plt.subplots(figsize=(10,6))
-        
-        ax.plot(df["Company"], df["Actual_ROE"], marker='o', label="Actual ROE")
-        ax.plot(df["Company"], df["Predicted_ROE"], marker='x', label="Predicted ROE", linestyle='--')
+    df_plot = pd.DataFrame({
+                    "Company": [ticker],
+                    "Actual_ROE": [roe_actual_2024],
+                    "Predicted_ROE": [predicted_roe]
+                })
 
-        ax.set_xlabel("Company")
-        ax.set_ylabel("ROE")
-        ax.set_title("Actual vs Predicted ROE")
-        ax.legend()
-        ax.grid(True)
+                st.subheader("Actual ROE vs Predicted ROE Comparison")
 
-        st.pyplot(fig)
-    else:
-        st.warning("Actual and Predicted ROE data are not available yet.")
+                fig, ax = plt.subplots(figsize=(8,5))
+
+                ax.plot(df_plot["Company"], df_plot["Actual_ROE"], marker='o', label="Actual ROE")
+                ax.plot(df_plot["Company"], df_plot["Predicted_ROE"], marker='x', label="Predicted ROE", linestyle='--')
+
+                ax.set_xlabel("Company")
+                ax.set_ylabel("ROE")
+                ax.set_title("Actual vs Predicted ROE")
+                ax.legend()
+                ax.grid(True)
+
+                st.pyplot(fig)
+
+        except Exception as e:
+            st.error(f"Error fetching or calculating data: {e}")
 
 
-# --- Tab 6: Custom Prediction ---
-with tab6:
+# --- Tab 5: Custom Prediction ---
+with tab5:
     st.title("🧮 Predict ROE from Custom Inputs")
 
     st.markdown("""
@@ -239,6 +186,66 @@ with tab6:
         predicted_custom_roe = model.predict(input_custom)[0]
 
         st.success(f"Predicted ROE based on inputs: {predicted_custom_roe:.2%}")
+# --- Tab 7: Model Assessment ---
+with tab7: 
+    st.header("🔍 Model Assessment")
+    
+    st.subheader("Summary")
+    st.markdown("""
+    ✅ Your intuition was 100% correct:  
+    *Model performs decently for average stocks but overpredicts/underpredicts a lot for outliers.*
+    
+    **Confirmed and Verified** across screenshots and examples.
+    """)
+    
+    st.subheader("Bottom Line")
+    st.markdown("""
+    - **Model learning problem**: Partly due to heavy data cleaning ✅
+    - **Scaling, pipeline, model design**: All correct ✅
+    - **Data diversity needed for rare events**: Missing ❗
+    
+    ✅ Your thinking is exactly on point.  
+    ✅ You correctly diagnosed a deep cause for why the model feels "flat" on difficult companies.
+    """)
+    
+    st.subheader("Quick Math")
+    st.markdown("""
+    - **Before Cleaning**: 130k rows → coverage of extreme PMR, ATR, EQM
+    - **After Cleaning**: 32k rows → mostly "normal" companies
+    - **Model View**: Model mostly sees "average" behavior → struggles with rare/unusual stocks.
+    """)
+
+    st.subheader("Summary of Patterns")
+    st.table({
+        "Situation": ["PMR negative large", "ATR close to 0", "EQM huge (>8) or negative", "Features moderate and clean"],
+        "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
+    })
+
+    st.subheader("Why is this important?")
+    st.markdown("""
+    - **Less data = less learning**: XGBoost and tree-based models need large diverse datasets.
+    - **Distributional Shrinkage**: You may lose important outliers or data variety.
+    - **Bias introduced**: Model biases towards "safe, average" companies, missing extreme PMR/ATR/EQM cases.
+    """)
+    
+    st.subheader("Observations")
+    st.markdown("""
+    - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
+    - **Tiny ATR** → bad overpredictions
+    - **Extreme EQM** → unstable predictions (wild numbers)
+    - **Normal ranges** → model does OK (TSLA, CELH, ACA, FOX)
+    """)
+
+    st.subheader("Normal Ranges for Good Predictions")
+    st.table({
+        "Feature": ["PMR", "ATR", "EQM"],
+        "Good Predictable Range": ["0.05 to 0.4", "0.2 to 1.2", "1.0 to 6.0"]
+    })
+
+    st.markdown("""
+    ✅ Stocks **inside** these bands → your model is pretty accurate.  
+    ❌ Stocks **outside** these bands → your model **blows up** (wild predictions).
+    """)
 
 # Footer
 st.markdown("""
