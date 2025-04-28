@@ -188,35 +188,47 @@ with tab6:
     st.title("🔍 Model Assessment")
     
     st.header("Summary")
-    st.markdown("""
-    ✅ Your intuition was 100% correct:  
+    st.markdown(""" 
     *Model performs decently for average stocks but overpredicts/underpredicts a lot for outliers.*
-    
-    **Confirmed and Verified** across screenshots and examples.
     """)
-    
-    st.header("Bottom Line")
+    st.subheader("Summary of Patterns")
+    st.table({
+        "Situation": ["PMR negative large", "ATR close to 0", "EQM huge (>8) or negative", "Features moderate and clean"],
+        "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
+    })
+
+     st.subheader("Observations")
+    st.markdown("""
+    - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
+    - **Tiny ATR** → bad overpredictions
+    - **Extreme EQM** → unstable predictions (wild numbers)
+    - **Normal ranges** → model does OK (TSLA, CELH, ACA, FOX)
+    """)
+
+    st.subheader("Normal Ranges for Good Predictions")
+    st.table({
+        "Feature": ["PMR", "ATR", "EQM"],
+        "Good Predictable Range": ["0.05 to 0.4", "0.2 to 1.2", "1.0 to 6.0"]
+    })
+
+    st.markdown("""
+    ✅ Stocks **inside** these bands → our model is pretty accurate.  
+    ❌ Stocks **outside** these bands → our model **blows up** (wild predictions).
+    """)
+
+    st.subheader("Bottom Line")
     st.markdown("""
     - **Model learning problem**: Partly due to heavy data cleaning ✅
     - **Scaling, pipeline, model design**: All correct ✅
     - **Data diversity needed for rare events**: Missing ❗
-    
-    ✅ Your thinking is exactly on point.  
-    ✅ You correctly diagnosed a deep cause for why the model feels "flat" on difficult companies.
     """)
     
-    st.header("Quick Math")
+    st.subheader("Quick Math")
     st.markdown("""
     - **Before Cleaning**: 130k rows → coverage of extreme PMR, ATR, EQM
     - **After Cleaning**: 32k rows → mostly "normal" companies
     - **Model View**: Model mostly sees "average" behavior → struggles with rare/unusual stocks.
     """)
-
-    st.header("Summary of Patterns")
-    st.table({
-        "Situation": ["PMR negative large", "ATR close to 0", "EQM huge (>8) or negative", "Features moderate and clean"],
-        "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
-    })
 
     st.subheader("Why is this important?")
     st.markdown("""
@@ -225,24 +237,6 @@ with tab6:
     - **Bias introduced**: Model biases towards "safe, average" companies, missing extreme PMR/ATR/EQM cases.
     """)
     
-    st.header("Observations")
-    st.markdown("""
-    - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
-    - **Tiny ATR** → bad overpredictions
-    - **Extreme EQM** → unstable predictions (wild numbers)
-    - **Normal ranges** → model does OK (TSLA, CELH, ACA, FOX)
-    """)
-
-    st.header("Normal Ranges for Good Predictions")
-    st.table({
-        "Feature": ["PMR", "ATR", "EQM"],
-        "Good Predictable Range": ["0.05 to 0.4", "0.2 to 1.2", "1.0 to 6.0"]
-    })
-
-    st.markdown("""
-    ✅ Stocks **inside** these bands → your model is pretty accurate.  
-    ❌ Stocks **outside** these bands → your model **blows up** (wild predictions).
-    """)
 
 # Footer
 st.markdown("""
