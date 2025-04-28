@@ -197,7 +197,7 @@ with tab6:
         "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
     })
 
-     st.subheader("Observations")
+    st.subheader("Observations")
     st.markdown("""
     - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
     - **Tiny ATR** → bad overpredictions
