@@ -4,4 +4,4 @@ numpy
 yfinance
 xgboost
 scikit-learn
-matplotlib.pyplot
+matplotlib
