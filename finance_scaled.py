@@ -141,30 +141,6 @@ with tab4:
                 roe_actual_2024 = (net_income_2024 / total_equity_2024)
                 st.info(f"Actual ROE (2024): {roe_actual_2024:.2%}")
 
-                df_plot = pd.DataFrame({
-                    "Company": [ticker],
-                    "Actual_ROE": [roe_actual_2024],
-                    "Predicted_ROE": [predicted_roe]
-                })
-
-                st.subheader("Actual ROE vs Predicted ROE Comparison")
-
-                fig, ax = plt.subplots(figsize=(8,5))
-
-                ax.plot(df_plot["Company"], df_plot["Actual_ROE"], marker='o', label="Actual ROE")
-                ax.plot(df_plot["Company"], df_plot["Predicted_ROE"], marker='x', label="Predicted ROE", linestyle='--')
-
-                ax.set_xlabel("Company")
-                ax.set_ylabel("ROE")
-                ax.set_title("Actual vs Predicted ROE")
-                ax.legend()
-                ax.grid(True)
-
-                st.pyplot(fig)
-
-        except Exception as e:
-            st.error(f"Error fetching or calculating data: {e}")
-
 
 # --- Tab 5: Custom Prediction ---
 with tab5:
