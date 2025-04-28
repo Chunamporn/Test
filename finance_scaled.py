@@ -140,11 +140,7 @@ with tab4:
                 roe_actual_2024 = (net_income_2024 / total_equity_2024)
                 st.info(f"Actual ROE (2024): {roe_actual_2024:.2%}")
 
-        except Exception as e:
-            st.error(f"Error fetching or calculating data: {e}")
-        st.subheader("Actual ROE vs Predicted ROE Comparison")
-
-    df_plot = pd.DataFrame({
+                df_plot = pd.DataFrame({
                     "Company": [ticker],
                     "Actual_ROE": [roe_actual_2024],
                     "Predicted_ROE": [predicted_roe]
