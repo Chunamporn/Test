@@ -27,12 +27,13 @@ def load_model():
 model = load_model()
 
 # --- App Layout: Tabs ---
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "DuPont Analysis",
     "Data Cleaning",
     "Model Overview",
     "Live ROE Prediction",
-    "Custom Input Prediction"
+    "Custom Input Prediction",
+    "Model Assessment"
 ])
 
 # --- Tab 1: DuPont Analysis ---
@@ -194,7 +195,7 @@ with tab6:
     **Confirmed and Verified** across screenshots and examples.
     """)
     
-    st.subheader("Bottom Line")
+    st.header("Bottom Line")
     st.markdown("""
     - **Model learning problem**: Partly due to heavy data cleaning ✅
     - **Scaling, pipeline, model design**: All correct ✅
