@@ -184,7 +184,7 @@ with tab5:
         st.success(f"Predicted ROE based on inputs: {predicted_custom_roe:.2%}")
 # --- Tab 6: Model Assessment ---
 with tab6: 
-    st.header("🔍 Model Assessment")
+    st.title("🔍 Model Assessment")
     
     st.subheader("Summary")
     st.markdown("""
