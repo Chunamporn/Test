@@ -182,8 +182,8 @@ with tab5:
         predicted_custom_roe = model.predict(input_custom)[0]
 
         st.success(f"Predicted ROE based on inputs: {predicted_custom_roe:.2%}")
-# --- Tab 7: Model Assessment ---
-with tab7: 
+# --- Tab 6: Model Assessment ---
+with tab6: 
     st.header("🔍 Model Assessment")
     
     st.subheader("Summary")
