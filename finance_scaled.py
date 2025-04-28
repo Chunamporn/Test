@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 import pickle
+import matplotlib.pyplot as plt
 
 # Set page configuration
 st.set_page_config(page_title="ROE Predictor App", layout="wide")
