@@ -186,7 +186,7 @@ with tab5:
 with tab6: 
     st.title("🔍 Model Assessment")
     
-    st.subheader("Summary")
+    st.header("Summary")
     st.markdown("""
     ✅ Your intuition was 100% correct:  
     *Model performs decently for average stocks but overpredicts/underpredicts a lot for outliers.*
@@ -204,14 +204,14 @@ with tab6:
     ✅ You correctly diagnosed a deep cause for why the model feels "flat" on difficult companies.
     """)
     
-    st.subheader("Quick Math")
+    st.header("Quick Math")
     st.markdown("""
     - **Before Cleaning**: 130k rows → coverage of extreme PMR, ATR, EQM
     - **After Cleaning**: 32k rows → mostly "normal" companies
     - **Model View**: Model mostly sees "average" behavior → struggles with rare/unusual stocks.
     """)
 
-    st.subheader("Summary of Patterns")
+    st.header("Summary of Patterns")
     st.table({
         "Situation": ["PMR negative large", "ATR close to 0", "EQM huge (>8) or negative", "Features moderate and clean"],
         "Model Behavior": ["Massive overprediction or wrong sign", "Overpredicts badly", "Highly unstable prediction", "Good prediction"]
@@ -224,7 +224,7 @@ with tab6:
     - **Bias introduced**: Model biases towards "safe, average" companies, missing extreme PMR/ATR/EQM cases.
     """)
     
-    st.subheader("Observations")
+    st.header("Observations")
     st.markdown("""
     - **Extreme PMR** → model blows up (e.g., LCID, WOLF, JNVR)
     - **Tiny ATR** → bad overpredictions
@@ -232,7 +232,7 @@ with tab6:
     - **Normal ranges** → model does OK (TSLA, CELH, ACA, FOX)
     """)
 
-    st.subheader("Normal Ranges for Good Predictions")
+    st.header("Normal Ranges for Good Predictions")
     st.table({
         "Feature": ["PMR", "ATR", "EQM"],
         "Good Predictable Range": ["0.05 to 0.4", "0.2 to 1.2", "1.0 to 6.0"]
