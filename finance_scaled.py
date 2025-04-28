@@ -141,7 +141,6 @@ with tab4:
                 roe_actual_2024 = (net_income_2024 / total_equity_2024)
                 st.info(f"Actual ROE (2024): {roe_actual_2024:.2%}")
 
-
 # --- Tab 5: Custom Prediction ---
 with tab5:
     st.title("🧮 Predict ROE from Custom Inputs")
