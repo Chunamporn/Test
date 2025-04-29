@@ -40,7 +40,7 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
 with tab1:
     st.title("📚 DuPont Analysis Overview")
     st.markdown("""
-    **DuPont Analysis** is a method of performance measurement that was started by the DuPont Corporation in the 1920s.
+    **DuPont Analysis** is a method of performance measurement that was started by the DuPont Corporation in the 1920s. 
 
     It breaks Return on Equity (ROE) into three parts:
     - **Profit Margin Ratio (PMR)** = Net Income / Revenue
@@ -48,24 +48,42 @@ with tab1:
     - **Equity Multiplier (EQM)** = Total Assets / Total Equity
 
     ROE = PMR × ATR × EQM
-
     This breakdown helps understand the underlying drivers of company profitability.
+    """)
+    st.image("DuPont 2.png", caption="Dupont Analysis Model")
+    st.markdown("""
+
+    **Why Projected ROE Matters**  
+    Projected ROE shows **how efficiently a company is expected to generate profits from its shareholders' equity in the future**.  
+    - A **rising projected ROE** can signal stronger profitability, better management, or a more efficient business model.  
+    - A **falling projected ROE** may warn of declining margins, operational challenges, or increased financial risk.
+    
+    Investors closely monitor projected ROE because it **directly impacts future returns** and **valuations**. Companies with high and stable ROE projections often command premium valuations and attract long-term investors.
     """)
 
 # --- Tab 2: Data Collection and Cleaning ---
 with tab2:
     st.title("🧹 Data Collection and Cleaning")
     st.markdown("""
-    We collected financial data from **Yahoo Finance** and **EDGAR**.
+### Data Cleaning Summary
 
-    **Data Cleaning Steps:**
-    - Handled missing values.
-    - Standardized column names.
-    - Calculated DuPont components (PMR, ATR, EQM).
-    - Normalized input features.
+To ensure the quality, reliability, and usability of the dataset, a thorough data cleaning process was conducted, which involved the following steps:
 
-    Only companies with full financials for required years were included.
-    """)
+- **Data Type Validation and Conversion**  
+All columns were carefully reviewed to verify that their data types matched the nature of the information they contained. Wherever discrepancies were found, data types were corrected (e.g., converting strings to numerical types) to enable accurate calculations and visualizations.
+
+- **Handling Missing Values (NA Values)**  
+Rows containing missing (NA) values were removed to prevent biases and inaccuracies in the analysis. Ensuring a complete dataset improves the robustness and interpretability of the results.
+
+- **Filtering Out Invalid Zero Entries**  
+Rows where critical features had zero values — which were deemed invalid or non-representative for meaningful analysis — were excluded. This step helped maintain the integrity and relevance of the dataset.
+
+- **Outlier Treatment through Winsorization**  
+Outliers can heavily skew statistical results and model performance. To address this, Winsorization was applied — extreme high and low values were capped at specific percentile thresholds. This technique retained the overall structure of the data while minimizing the influence of anomalies.
+
+Overall, these data cleaning steps significantly enhanced the dataset’s quality, ensuring that subsequent analyses are based on accurate, complete, and reliable information.
+""")
+
 
 # --- Tab 3: Model Overview ---
 with tab3:
