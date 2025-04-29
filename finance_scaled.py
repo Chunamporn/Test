@@ -140,7 +140,9 @@ with tab4:
                 # Calculate actual 2024 ROE
                 roe_actual_2024 = (net_income_2024 / total_equity_2024)
                 st.info(f"Actual ROE (2024): {roe_actual_2024:.2%}")
-
+        except Exception as e:
+            st.error(f"Error fetching or calculating data: {e}")
+            
 # --- Tab 5: Custom Prediction ---
 with tab5:
     st.title("🧮 Predict ROE from Custom Inputs")
