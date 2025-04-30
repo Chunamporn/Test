@@ -1,5 +1,5 @@
 Project Description
-This project aims to predict a company's Return on Equity (ROE) for the next year using machine learning, based on financial ratios derived from the DuPont Analysis framework. The model uses three key features Profit Margin Ratio (PMR), Asset Turnover Ratio (ATR), and Equity Multiplier (EQM) — to forecast ROE.
+This project aims to predict a company's Return on Equity (ROE) for the next year using machine learning, based on financial ratios derived from the DuPont Analysis framework. The model uses three key features Profit Margin Ratio (PMR), Asset Turnover Ratio (ATR), and Equity Multiplier (EQM) to forecast ROE.
 
 The app was built using:
 Real-world financial data pulled via Yahoo Finance
